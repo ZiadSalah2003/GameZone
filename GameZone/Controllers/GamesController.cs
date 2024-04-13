@@ -1,17 +1,31 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿
 
 namespace GameZone.Controllers
 {
     public class GamesController : Controller
     {
-        public IActionResult Index()
+        private readonly ApplicationDbContext _context;
+
+		public GamesController(ApplicationDbContext context)
+		{
+			_context = context;
+		}
+
+		public IActionResult Index()
         {
             return View();
         }
         [HttpGet]
         public IActionResult Create()
         {
-            return View();
+            CreateGameFormViewModel viewModel = new()
+            {
+                Categories = _context.Categories
+                .Select(c => new SelectListItem { Value = c.Id.ToString(), Text = c.Name })
+                .OrderBy(c => c.Text)
+                .ToList()
+            };
+            return View(viewModel);
         }
     }
 }

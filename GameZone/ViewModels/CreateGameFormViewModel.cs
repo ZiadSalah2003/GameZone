@@ -5,6 +5,7 @@ namespace GameZone.ViewModels
     public class CreateGameFormViewModel
     {
         public string Name { get; set; } = string.Empty;
+        [Display(Name="Category")]
         public int CategoryId { get; set; }
 
         public IEnumerable<SelectListItem> Categories { get; set; } = Enumerable.Empty<SelectListItem>();
