@@ -23,8 +23,13 @@ namespace GameZone.Controllers
                 Categories = _context.Categories
                 .Select(c => new SelectListItem { Value = c.Id.ToString(), Text = c.Name })
                 .OrderBy(c => c.Text)
-                .ToList()
-            };
+                .ToList(),
+
+				 Devices = _context.Devices
+				.Select(d => new SelectListItem { Value = d.Id.ToString(), Text = d.Name })
+				.OrderBy(d => d.Text)
+				.ToList()
+			};
             return View(viewModel);
         }
     }
