@@ -9,9 +9,9 @@ namespace GameZone.ViewModels
         public int CategoryId { get; set; }
 
         public IEnumerable<SelectListItem> Categories { get; set; } = Enumerable.Empty<SelectListItem>();
-		
+
         [Display(Name = "Supported Devices")]
-		public List<int> SelectedDevies { get; set; } = new List<int>();
+        public List<int> SelectedDevies { get; set; } = default!;
 
 		
 		public IEnumerable<SelectListItem> Devices { get; set; } = Enumerable.Empty<SelectListItem>();
