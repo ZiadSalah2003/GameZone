@@ -6,12 +6,14 @@ namespace GameZone.Controllers
 		private readonly ApplicationDbContext _context;
 		private readonly ICategoriesService _categoriesService;
 		private readonly IDevicesService _devicesService;
+		private readonly IGamesServices _gamesServices;
 
-		public GamesController(ApplicationDbContext context, ICategoriesService categoriesService, IDevicesService devicesService)
+		public GamesController(ApplicationDbContext context, ICategoriesService categoriesService, IDevicesService devicesService, IGamesServices gamesServices)
 		{
 			_context = context;
 			this._categoriesService = categoriesService;
 			_devicesService = devicesService;
+			_gamesServices = gamesServices;
 		}
 
 		public IActionResult Index()
@@ -30,7 +32,7 @@ namespace GameZone.Controllers
 		}
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public IActionResult Create(CreateGameFormViewModel model)
+		public async Task<IActionResult> Create(CreateGameFormViewModel model)
 		{
 			if (!ModelState.IsValid)
 			{
@@ -38,6 +40,7 @@ namespace GameZone.Controllers
 				model.Devices = _devicesService.GetSelectList();
 				return View(model);
 			}
+			await _gamesServices.Create(model);
 			return RedirectToAction(nameof(Index));
 		}
 	}
