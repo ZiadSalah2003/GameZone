@@ -2,7 +2,7 @@
 
 namespace GameZone.Services
 {
-	public class GamesServices
+	public class GamesServices : IGamesServices
 	{
 		private readonly ApplicationDbContext _context;
 		private readonly IWebHostEnvironment _webHostEnvironment;

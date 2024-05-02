@@ -2,6 +2,6 @@
 {
 	public interface IGamesServices
 	{
-		Task Create (CreateGameFormViewModel model)
+		Task Create(CreateGameFormViewModel model);
 	}
 }
